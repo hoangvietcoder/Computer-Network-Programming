@@ -1,0 +1,123 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+@SuppressWarnings("serial")
+public class Menu extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Menu frame = new Menu();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Menu() {
+		setTitle("Menu");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 612, 417);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Chat Client/Server|");
+		mnNewMenu.setFont(new Font("Tahoma", Font.BOLD, 18));
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Server_Chat");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Server_Chat server = new Server_Chat();
+				server.setVisible(true);
+			}
+		});
+		mntmNewMenuItem.setFont(new Font("Tahoma", Font.BOLD, 16));
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Client_Chat");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Client_Chat client = new Client_Chat();
+				client.setVisible(true);
+			}
+		});
+		mntmNewMenuItem_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		JMenu mnBaseConverter = new JMenu("|Base Converter");
+		mnBaseConverter.setFont(new Font("Tahoma", Font.BOLD, 18));
+		menuBar.add(mnBaseConverter);
+		
+		JMenuItem mntmServerbaseconverter = new JMenuItem("Server_BaseConverter");
+		mntmServerbaseconverter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Server_BaseConverter server = new Server_BaseConverter();
+				server.setVisible(true);
+			}
+		});
+		mntmServerbaseconverter.setFont(new Font("Tahoma", Font.BOLD, 16));
+		mnBaseConverter.add(mntmServerbaseconverter);
+		
+		JMenuItem mntmNewMenuItem_1_1 = new JMenuItem("Client_BaseConverter");
+		mntmNewMenuItem_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Client_BaseConverter client = new Client_BaseConverter();
+				client.setVisible(true);
+			}
+		});
+		mntmNewMenuItem_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		mnBaseConverter.add(mntmNewMenuItem_1_1);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("51900847 - Mai Ho\u00E0ng Vi\u1EC7t");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
+		lblNewLabel.setBounds(153, 127, 320, 52);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNg = new JLabel("51900788 - Ng\u00F4 Tr\u1EA7n \u0110\u00F4");
+		lblNg.setForeground(Color.RED);
+		lblNg.setFont(new Font("Times New Roman", Font.BOLD, 24));
+		lblNg.setBounds(153, 175, 320, 52);
+		contentPane.add(lblNg);
+		
+		JLabel lblNguyn = new JLabel("51900843 - Nguy\u1EC5n Phong T\u00FA");
+		lblNguyn.setForeground(Color.RED);
+		lblNguyn.setFont(new Font("Times New Roman", Font.BOLD, 24));
+		lblNguyn.setBounds(153, 228, 320, 52);
+		contentPane.add(lblNguyn);
+		
+		JLabel lblNhm = new JLabel("NH\u00D3M 17");
+		lblNhm.setForeground(Color.GRAY);
+		lblNhm.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		lblNhm.setBounds(224, 65, 165, 52);
+		contentPane.add(lblNhm);
+	}
+}

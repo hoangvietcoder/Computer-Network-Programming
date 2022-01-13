@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;BT6&apos; to &apos;BT5&apos;&#x0D;&#x0A;- Original project: &apos;LAB5&apos;&#x0D;&#x0A;- Original element: &apos;BT6&apos;&#x0D;&#x0A;- Renamed element: &apos;BT5&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;BT6&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{BT6.java[BT6" matchStrategy="1" name="BT5" qualified="false" references="true" similarDeclarations="false" stamp="1636526583710" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,126 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.awt.event.ActionEvent;
+
+public class BT8 extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textFieldHostName;
+	private JTextField textFieldPortNumber;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BT8 frame = new BT8();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public BT8() {
+		setTitle("A command-line whois client");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 876, 560);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("Host Name:");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblNewLabel.setBounds(23, 41, 105, 31);
+		contentPane.add(lblNewLabel);
+
+		textFieldHostName = new JTextField();
+		textFieldHostName.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		textFieldHostName.setText("whois.internic.net");
+		textFieldHostName.setBounds(138, 39, 336, 40);
+		contentPane.add(textFieldHostName);
+		textFieldHostName.setColumns(10);
+
+		JLabel lblPortNumber = new JLabel("Port Number:");
+		lblPortNumber.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblPortNumber.setBounds(564, 41, 117, 31);
+		contentPane.add(lblPortNumber);
+
+		JTextArea textAreaResult = new JTextArea();
+		textAreaResult.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		textAreaResult.setBounds(138, 206, 665, 278);
+		contentPane.add(textAreaResult);
+
+		textFieldPortNumber = new JTextField();
+		textFieldPortNumber.setText("43");
+		textFieldPortNumber.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		textFieldPortNumber.setBounds(686, 39, 117, 40);
+		contentPane.add(textFieldPortNumber);
+		textFieldPortNumber.setColumns(10);
+
+		JButton btnNewButton = new JButton("Click Here");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String getHostName = textFieldHostName.getText();
+				int getPort = Integer.parseInt(textFieldPortNumber.getText());
+				String serverName = System.getProperty("WHOIS_SERVER", getHostName);
+				InetAddress server = null;
+				try {
+					server = InetAddress.getByName(serverName);
+				} catch (UnknownHostException e1) {
+					textAreaResult.setText("Error: Could not locate whois server " + server);
+					textAreaResult.setText("Usage: java -DWHOIS_SERVER=hostname WhoisClient name");
+					return;
+				}
+				try {
+					Socket theSocket = new Socket(server, getPort);
+					Writer out = new OutputStreamWriter(theSocket.getOutputStream(), "8859_1");
+					for (int i = 0; i < args.length; i++)
+						out.write(args[i] + " ");
+					out.write("\r\n");
+					out.flush();
+					InputStream raw = theSocket.getInputStream();
+					InputStream in = new BufferedInputStream(theSocket.getInputStream());
+					int c;
+					while ((c = in.read()) != -1)
+						System.out.write(c);
+				} catch (IOException ex) {
+					System.err.println(ex);
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		btnNewButton.setBounds(406, 119, 125, 50);
+		contentPane.add(btnNewButton);
+
+		JLabel lblResult = new JLabel("Result:");
+		lblResult.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblResult.setBounds(23, 326, 84, 31);
+		contentPane.add(lblResult);
+	}
+}
